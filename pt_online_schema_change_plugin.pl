@@ -11,7 +11,7 @@ sub new {
 }
 
 sub before_swap_tables {
-    my $pauseFile = './pt_schema_change_wait_.txt';
+    my $pauseFile = './pt_osc_before_swap_wait.txt';
 
     if (-e $pauseFile) {
         #file $pauseFile exist
@@ -29,7 +29,7 @@ sub before_swap_tables {
     #loop until deleted
     while (-e $pauseFile) {
         print "File $pauseFile is present will delay table swap by 1 minute to proceed silmply delete this file\n";
-        sleep(60);
+        sleep(10);
     }
     print "File is $pauseFile NOT present will swap tables now!\n";
     return;
